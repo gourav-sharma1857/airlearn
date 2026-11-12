@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1B4DA6" />
+  <link rel="icon" href="%BRAND_LOGO%" />
+  <link rel="stylesheet" href="/src/styles/base.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet" />
+  <title>%BRAND_NAME% · %BRAND_TAGLINE%</title>
+  <meta name="description" content="A webcam-based geometry tool: pinch a 3D cube with your own hand, stretch it, and watch surface area and volume update live." />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./index.html">
+        <img src="%BRAND_LOGO%" width="36" height="36" alt="" />
+        <span>%BRAND_NAME%</span>
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./lesson.html">Try the cube</a></li>
+          <li><a href="./teachers.html">For teachers</a></li>
+          <li><a href="./privacy.html">Privacy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">A geometry tool for high school classrooms</p>
+          <h1>Hold concepts in
+            <span class="scribble-underline">your hands.<svg viewBox="0 0 240 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 9 C 45 3, 85 13, 125 7 S 200 3, 237 8" fill="none" stroke="#FFD54A" stroke-width="6" stroke-linecap="round"/></svg></span>
+          </h1>
+          <p class="lead"><span>%BRAND_NAME%</span> turns your webcam into a way to touch math. Pinch a 3D cube with your thumb and finger, stretch it, and watch its surface area and volume change as you move.</p>
+          <div class="btn-row">
+            <a class="btn btn-yellow" href="./lesson.html">Try the cube
+              <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5c5-.6 10-.4 15-.2M14 6.5c2 2 3.6 3.8 5.2 5.8-1.8 1.8-3.4 3.6-5 5.6"/></svg>
+            </a>
+            <a class="btn btn-secondary" href="./teachers.html">For teachers</a>
+          </div>
+          <p style="margin-top:1rem;color:var(--ink-soft)">No account, no install. No webcam? A mouse or touchscreen works too.</p>
+        </div>
+
+        <figure class="hero-art" style="margin:0">
+          <svg viewBox="0 0 520 360" role="img" aria-labelledby="art-title art-desc">
+            <title id="art-title">Doubling a cube's edge</title>
+            <desc id="art-desc">A small cube with edge 2 has surface area 24 and volume 8. Stretched to edge 4, the surface area becomes 96, four times as much, and the volume becomes 64, eight times as much.</desc>
+            <g fill="none" stroke="#F7FAFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <!-- small cube -->
+              <path d="M40 190 L110 190 L110 260 L40 260 Z" />
+              <path d="M40 190 L68 162 L138 162 L110 190 M138 162 L138 232 L110 260" />
+              <path d="M68 162 L68 232 L40 260 M68 232 L138 232" stroke-dasharray="5 7" opacity=".55" />
+              <!-- big cube -->
+              <path d="M262 136 L402 136 L402 276 L262 276 Z" />
+              <path d="M262 136 L318 80 L458 80 L402 136 M458 80 L458 220 L402 276" />
+              <path d="M318 80 L318 220 L262 276 M318 220 L458 220" stroke-dasharray="6 8" opacity=".55" />
+              <!-- arrow -->
+              <path d="M150 150 C 180 100, 220 96, 246 118" stroke="#FFD54A" stroke-width="3.5" />
+              <path d="M232 106 L247 119 L228 124" stroke="#FFD54A" stroke-width="3.5" />
+            </g>
+            <circle cx="458" cy="80" r="9" fill="#FFD54A" stroke="#0F2A55" stroke-width="2.5" />
+            <g font-family="Patrick Hand, cursive" fill="#F7FAFF">
+              <text x="62" y="288" font-size="22">a = 2</text>
+              <text x="26" y="318" font-size="20" fill="#C9E2F6">S = 24, V = 8</text>
+              <text x="304" y="306" font-size="22">a = 4</text>
+              <text x="252" y="336" font-size="20" fill="#C9E2F6">S = 96, V = 64</text>
+              <text x="160" y="84" font-size="20" fill="#FFD54A">pinch &amp; stretch</text>
+            </g>
+            <g font-family="Patrick Hand, cursive" font-size="20" fill="#0F2A55">
+              <g transform="rotate(-6 455 285)">
+                <rect x="418" y="262" width="78" height="34" rx="17" fill="#C9E2F6" stroke="#0F2A55" stroke-width="2" />
+                <text x="432" y="286">S ×4</text>
+              </g>
+              <g transform="rotate(5 455 330)">
+                <rect x="418" y="308" width="78" height="34" rx="17" fill="#FFD54A" stroke="#0F2A55" stroke-width="2" />
+                <text x="432" y="332">V ×8</text>
+              </g>
+            </g>
+          </svg>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="how-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="how-title">How it works</h2>
+          <p class="lead">Four steps, about ten minutes, one big idea: when a shape grows, area and volume don't grow at the same speed.</p>
+        </div>
+        <ol class="steps">
+          <li>
+            <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="9" width="36" height="24" rx="3"/><path d="M3 39h42M18 21h12M26 17l4 4-4 4"/></svg>
+            <h3>Open it</h3>
+            <p>Open the link in Chrome on a laptop or Chromebook. Nothing to install, no account.</p>
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="13" width="28" height="22" rx="4"/><path d="M33 21l10-6v18l-10-6"/><circle cx="19" cy="24" r="5"/></svg>
+            <h3>Allow the camera</h3>
+            <p>The camera only finds your hand. The video stays on your device and is never saved or sent.</p>
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 30c-3-6-4-12 0-16 3 3 5 7 7 11M21 25c1-7 3-14 9-15 2 5 0 10-3 14"/><circle cx="25" cy="27" r="3" fill="currentColor"/><path d="M14 30c3 6 9 9 16 7 6-2 9-7 9-13"/></svg>
+            <h3>Pinch to grab</h3>
+            <p>Touch your thumb to your index finger to grab the cube. Move to spin it.</p>
+          </li>
+          <li>
+            <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 40h36"/><rect x="10" y="30" width="6" height="10"/><rect x="21" y="22" width="6" height="18"/><rect x="32" y="8" width="6" height="32"/></svg>
+            <h3>Stretch and watch</h3>
+            <p>Pull the yellow corner. Edge, surface area and volume update live as you move.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="privacy-title">
+      <div class="wrap">
+        <div class="paper privacy-note">
+          <svg class="shield" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M48 8c12 8 24 10 34 10 0 30-8 56-34 70C22 74 14 48 14 18c10 0 22-2 34-10z"/><path d="M33 49c4 3 7 6 10 11 6-11 12-18 21-24" stroke="#FFD54A" stroke-width="6"/></svg>
+          <div>
+            <h2 id="privacy-title" style="margin-bottom:.4rem">Your video never leaves your device</h2>
+            <p>Hand tracking runs inside your browser. We never record, store or upload video or pictures, and we don't ask for names or accounts. You can stop the camera at any time, or skip it and use the mouse.</p>
+            <a href="./privacy.html">Read the privacy page</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="cta-band">
+          <div>
+            <h2>Ready to stretch a cube?</h2>
+            <p>Designed to help students understand why doubling a length makes area ×4 and volume ×8.</p>
+          </div>
+          <a class="btn btn-yellow" href="./lesson.html">Try the cube</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><strong>%BRAND_NAME%</strong> · %BRAND_TAGLINE% · Prototype, <span data-year></span></p>
+      <ul>
+        <li><a href="./lesson.html">Try the cube</a></li>
+        <li><a href="./teachers.html">For teachers</a></li>
+        <li><a href="./privacy.html">Privacy</a></li>
+      </ul>
+    </div>
+  </footer>
+  <script type="module">
+    import { initSite } from './src/site.ts';
+    initSite();
+  </script>
+</body>
+</html>

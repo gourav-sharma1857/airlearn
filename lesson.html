@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1B4DA6" />
+  <link rel="icon" href="%BRAND_LOGO%" />
+  <link rel="stylesheet" href="/src/styles/base.css" />
+  <link rel="stylesheet" href="/src/styles/lesson-entry.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet" />
+  <title>Try the cube · %BRAND_NAME%</title>
+  <meta name="description" content="Pinch a 3D cube with your hand and watch surface area and volume change live." />
+</head>
+<body class="lesson-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./index.html">
+        <img src="%BRAND_LOGO%" width="36" height="36" alt="" />
+        <span>%BRAND_NAME%</span>
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./lesson.html">Try the cube</a></li>
+          <li><a href="./teachers.html">For teachers</a></li>
+          <li><a href="./privacy.html">Privacy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="lesson-bar">
+    <div class="wrap lesson-bar-inner">
+      <p class="progress" id="progress" aria-live="polite">Step 1 of 8 · Start</p>
+      <div class="lesson-controls">
+        <div class="mode-toggle" role="group" aria-label="Control mode">
+          <button type="button" id="mode-hand" aria-pressed="false">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11V4a1.5 1.5 0 0 1 3 0v7M14 11V5.5a1.5 1.5 0 0 1 3 0V14c0 4-2.5 7-6.5 7-3 0-4.5-1.5-6-4l-1.8-3a1.5 1.5 0 0 1 2.4-1.8L8 15"/></svg>
+            Hand
+          </button>
+          <button type="button" id="mode-mouse" aria-pressed="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="6"/><path d="M12 7v4"/></svg>
+            Mouse / touch
+          </button>
+        </div>
+        <div class="cam-status" id="cam-status" data-state="off" role="status" aria-live="polite">
+          <span class="dot" aria-hidden="true"></span><span id="cam-text">Camera off</span>
+        </div>
+        <button type="button" class="btn btn-small btn-secondary" id="stop-cam" hidden>Stop camera</button>
+      </div>
+    </div>
+  </div>
+
+  <main id="main" class="lesson-main">
+    <!-- 1. Intro -->
+    <section class="step" data-step="intro" aria-labelledby="h-intro">
+      <div class="wrap">
+        <div class="paper intro-card">
+          <p class="eyebrow">Lesson · Surface area and volume</p>
+          <h1 id="h-intro" tabindex="-1">Open it. Hold up your hand. <span class="scribble-underline">See the concept.<svg viewBox="0 0 240 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 9 C 45 3, 85 13, 125 7 S 200 3, 237 8" fill="none" stroke="#FFD54A" stroke-width="6" stroke-linecap="round"/></svg></span></h1>
+          <p class="lead">You'll grab a cube with your hand, stretch it, and watch what happens to its surface area and volume.</p>
+          <div class="btn-row">
+            <button class="btn btn-yellow" id="btn-start">Start</button>
+            <span class="sticker sky">about 10 minutes</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Camera permission -->
+    <section class="step" data-step="camera" aria-labelledby="h-camera" hidden>
+      <div class="wrap">
+        <div class="paper">
+          <h2 id="h-camera" tabindex="-1">Can we use your camera?</h2>
+          <p class="lead">The camera is only used to find your hand, so you can grab the cube.</p>
+          <ul class="check-list">
+            <li><strong>Your video never leaves this device.</strong> Hand tracking runs right here in your browser.</li>
+            <li>Nothing is recorded, saved or uploaded.</li>
+            <li>You can stop the camera at any time with the <strong>Stop camera</strong> button at the top.</li>
+          </ul>
+          <p>When you press the button, your browser will ask for permission. Choose <strong>Allow</strong>.</p>
+          <div class="btn-row">
+            <button class="btn" id="btn-allow">Turn on camera</button>
+            <button class="btn btn-secondary" data-action="use-mouse">Use mouse instead</button>
+          </div>
+          <div class="error-card" id="camera-error" role="alert" tabindex="-1" hidden>
+            <h3 id="camera-error-title"></h3>
+            <p id="camera-error-body"></p>
+            <div class="btn-row">
+              <button class="btn" data-action="use-mouse">Use mouse instead</button>
+              <button class="btn btn-secondary" id="btn-retry">Try again</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Hand check -->
+    <section class="step" data-step="handcheck" aria-labelledby="h-handcheck" hidden>
+      <div class="wrap handcheck-grid">
+        <div class="cam-slot" id="handcheck-slot"></div>
+        <div class="paper">
+          <h2 id="h-handcheck" tabindex="-1">Hand check</h2>
+          <p class="status-line" id="hc-status" role="status" aria-live="polite">Starting the camera…</p>
+          <ol class="hc-list">
+            <li id="hc-see"><span class="tick" aria-hidden="true"></span>Hold your hand up in good light</li>
+            <li id="hc-pinch"><span class="tick" aria-hidden="true"></span>Touch your thumb to your index finger (a pinch)</li>
+          </ol>
+          <div class="tip" id="hc-tip" hidden></div>
+          <div class="btn-row">
+            <button class="btn" id="btn-hc-continue">Continue</button>
+            <button class="btn btn-secondary" data-action="use-mouse">Use mouse instead</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Concept -->
+    <section class="step" data-step="concept" aria-labelledby="h-concept" hidden>
+      <div class="wrap">
+        <div class="paper concept-card">
+          <p class="eyebrow">The idea</p>
+          <h2 id="h-concept" tabindex="-1">Area grows with the edge <em>squared</em>. Volume grows with the edge <em>cubed</em>.</h2>
+          <div class="formula-pair">
+            <div class="formula-box">
+              <p class="formula-label">Surface area (6 square faces)</p>
+              <div class="formula" data-tex="S = 6a^2"></div>
+            </div>
+            <div class="formula-box">
+              <p class="formula-label">Volume</p>
+              <div class="formula" data-tex="V = a^3"></div>
+            </div>
+          </div>
+          <p>Here <em>a</em> is the length of one edge. So when <em>a</em> changes, surface area and volume don't change by the same amount.</p>
+          <div class="btn-row">
+            <button class="btn" data-next>Make a guess</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Guess before -->
+    <section class="step" data-step="guess1" aria-labelledby="h-guess1" hidden>
+      <div class="wrap">
+        <form class="paper guess" id="guess1-form">
+          <span class="sticker">Before you try it</span>
+          <h2 id="h-guess1" tabindex="-1">If you double the edge, what happens to the volume?</h2>
+          <fieldset>
+            <legend class="sr-only">Your guess</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="g" value="2" /><span>×2<small>twice as big</small></span></label>
+              <label class="choice"><input type="radio" name="g" value="4" /><span>×4<small>4 times as big</small></span></label>
+              <label class="choice"><input type="radio" name="g" value="6" /><span>×6<small>6 times as big</small></span></label>
+              <label class="choice"><input type="radio" name="g" value="8" /><span>×8<small>8 times as big</small></span></label>
+              <label class="choice"><input type="radio" name="g" value="unsure" /><span>Not sure<small>that is fine!</small></span></label>
+            </div>
+          </fieldset>
+          <p class="small-note">There's no score. Your answer is saved only in this browser.</p>
+          <div class="btn-row">
+            <button class="btn" type="submit">Lock in my guess</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 6. Demo -->
+    <section class="step" data-step="demo" aria-labelledby="h-demo" hidden>
+      <div class="wrap">
+        <h2 id="h-demo" tabindex="-1" class="demo-title">Stretch the cube from <em>a</em> = 2 to <em>a</em> = 4</h2>
+        <div class="demo-grid">
+          <div class="board" id="board" tabindex="0" role="application"
+               aria-roledescription="3D cube" aria-label="Cube. Arrow keys spin it. Plus and minus keys change the edge."
+               aria-describedby="board-help">
+            <div class="scene-host" id="scene-host"></div>
+            <p class="board-hint" id="board-hint">Drag the <span class="hl">yellow corner</span> to stretch · drag anywhere else to spin</p>
+            <div class="hand-cursor" id="hand-cursor" hidden></div>
+            <div class="mini-cam" id="mini-cam-slot" hidden></div>
+            <p class="celebrate" id="celebrate" hidden>Edge doubled! <strong>S ×4</strong> · <strong>V ×8</strong></p>
+            <div class="board-banner" id="board-banner" role="alert" hidden>
+              <p id="board-banner-text"></p>
+              <div class="btn-row">
+                <button class="btn btn-small btn-yellow" data-action="use-mouse">Use mouse instead</button>
+                <button class="btn btn-small btn-ghost" id="banner-dismiss">OK</button>
+              </div>
+            </div>
+            <div class="no-webgl" id="no-webgl" hidden>
+              <p>This device couldn't draw the 3D cube (WebGL is off or unavailable). The numbers on the right still work: use the Edge buttons.</p>
+            </div>
+          </div>
+
+          <aside class="readout" aria-labelledby="h-readout">
+            <h3 id="h-readout">Live numbers</h3>
+            <p class="edge-big">Edge <em>a</em> = <output id="r-edge">2</output></p>
+            <div class="live-formula" id="r-s"></div>
+            <div class="live-formula" id="r-v"></div>
+            <table class="compare">
+              <caption class="sr-only">Starting cube compared with the cube now</caption>
+              <thead>
+                <tr><th scope="col"></th><th scope="col">At <em>a</em>&nbsp;=&nbsp;2</th><th scope="col">Now</th><th scope="col">Change</th></tr>
+              </thead>
+              <tbody>
+                <tr id="row-s"><th scope="row">Surface area</th><td>24</td><td id="r-s-now">24</td><td><span class="mult" id="r-s-mult">×1</span></td></tr>
+                <tr id="row-v"><th scope="row">Volume</th><td>8</td><td id="r-v-now">8</td><td><span class="mult" id="r-v-mult">×1</span></td></tr>
+              </tbody>
+            </table>
+            <div class="btn-row edge-buttons">
+              <button class="btn btn-small btn-secondary" id="edge-minus" aria-label="Make edge smaller">− Edge</button>
+              <button class="btn btn-small btn-secondary" id="edge-plus" aria-label="Make edge bigger">+ Edge</button>
+              <button class="btn btn-small btn-secondary" id="edge-reset">Reset</button>
+            </div>
+            <p class="small-note" id="board-help">Keyboard: focus the board, then use arrow keys to spin and + / − to change the edge.</p>
+            <button class="btn" data-next id="demo-done">Answer the question again</button>
+          </aside>
+        </div>
+        <p class="sr-only" id="sr-announce" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- 7. Guess after -->
+    <section class="step" data-step="guess2" aria-labelledby="h-guess2" hidden>
+      <div class="wrap">
+        <form class="paper guess" id="guess2-form">
+          <span class="sticker sky">After the demo</span>
+          <h2 id="h-guess2" tabindex="-1">If you double the edge, what happens to the volume?</h2>
+          <fieldset>
+            <legend class="sr-only">Your answer</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="g" value="2" /><span>×2<small>twice as big</small></span></label>
+              <label class="choice"><input type="radio" name="g" value="4" /><span>×4<small>4 times as big</small></span></label>
+              <label class="choice"><input type="radio" name="g" value="6" /><span>×6<small>6 times as big</small></span></label>
+              <label class="choice"><input type="radio" name="g" value="8" /><span>×8<small>8 times as big</small></span></label>
+              <label class="choice"><input type="radio" name="g" value="unsure" /><span>Not sure<small>that is fine!</small></span></label>
+            </div>
+          </fieldset>
+          <div class="btn-row">
+            <button class="btn" type="submit">Check</button>
+          </div>
+          <div class="reveal" id="reveal" hidden tabindex="-1">
+            <p id="reveal-compare"></p>
+            <div class="formula" data-tex="(2a)^3 = 2^3 \cdot a^3 = 8a^3"></div>
+            <p>Doubling the edge makes the volume <strong>8 times</strong> as big, because the edge is used three times (length × width × height). Surface area only uses it twice, so it grows <strong>4 times</strong>.</p>
+            <button class="btn" type="button" data-next>See the recap</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 8. Wrap-up -->
+    <section class="step" data-step="wrap" aria-labelledby="h-wrap" hidden>
+      <div class="wrap">
+        <div class="paper">
+          <h2 id="h-wrap" tabindex="-1">Recap</h2>
+          <ul class="recap">
+            <li><span class="sticker sky">S ×4</span><div><div class="formula" data-tex="S = 6a^2 \;\Rightarrow\; 6(2a)^2 = 4 \cdot 6a^2"></div><p>Surface area depends on the edge squared, so doubling the edge gives 2² = 4 times the area.</p></div></li>
+            <li><span class="sticker">V ×8</span><div><div class="formula" data-tex="V = a^3 \;\Rightarrow\; (2a)^3 = 8a^3"></div><p>Volume depends on the edge cubed, so doubling the edge gives 2³ = 8 times the volume.</p></div></li>
+            <li><span class="sticker white">×k</span><div><p><strong>The general rule:</strong> scale every length by <em>k</em>, and area scales by <em>k</em>², volume by <em>k</em>³.</p></div></li>
+          </ul>
+          <div class="btn-row">
+            <a class="btn btn-yellow" id="feedback-link" href="#" target="_blank" rel="noopener">Tell us what you thought</a>
+            <button class="btn btn-secondary" id="btn-restart">Try again</button>
+            <a class="btn btn-secondary" href="./index.html">Back to home</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- The one camera view. Moved between the hand-check step and the demo board. -->
+  <div class="cam-view" id="cam-view">
+    <div class="cam-mirror">
+      <video id="cam-video" muted playsinline aria-label="Your camera preview, mirrored"></video>
+      <canvas id="cam-overlay" aria-hidden="true"></canvas>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><strong>%BRAND_NAME%</strong> · %BRAND_TAGLINE% · Prototype, <span data-year></span></p>
+      <ul>
+        <li><a href="./lesson.html">Try the cube</a></li>
+        <li><a href="./teachers.html">For teachers</a></li>
+        <li><a href="./privacy.html">Privacy</a></li>
+      </ul>
+    </div>
+  </footer>
+  <script type="module" src="./src/lesson/main.ts"></script>
+</body>
+</html>

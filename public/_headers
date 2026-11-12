@@ -1,0 +1,14 @@
+# Netlify and Cloudflare Pages. Keep in sync with vercel.json.
+# connect-src is the code-level guarantee that nothing (camera data included)
+# can be uploaded anywhere except our own origin and the Formspree signup.
+# If you set VITE_ANALYTICS_ENDPOINT, add its origin to connect-src.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' blob: mediastream:; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'
+  Permissions-Policy: camera=(self), microphone=(), geolocation=()
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff
+
+/models/*
+  Cache-Control: public, max-age=604800
+/mediapipe/*
+  Cache-Control: public, max-age=604800

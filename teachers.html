@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1B4DA6" />
+    <link rel="icon" href="%BRAND_LOGO%" />
+  <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Patrick+Hand&display=swap"
+      rel="stylesheet"
+    />
+    <title>For teachers · %BRAND_NAME%</title>
+    <meta
+      name="description"
+      content="A short, webcam-based geometry activity on how surface area and volume scale. Sign up for the classroom pilot."
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="./index.html">
+          <img src="%BRAND_LOGO%" width="36" height="36" alt="" />
+          <span>%BRAND_NAME%</span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./lesson.html">Try the cube</a></li>
+            <li><a href="./teachers.html">For teachers</a></li>
+            <li><a href="./privacy.html">Privacy</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <section class="hero">
+        <div class="wrap">
+          <p class="eyebrow">For teachers</p>
+          <h1>
+            A ten-minute activity your students can
+            <span class="scribble-underline"
+              >hold<svg
+                viewBox="0 0 240 14"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 9 C 45 3, 85 13, 125 7 S 200 3, 237 8"
+                  fill="none"
+                  stroke="#FFD54A"
+                  stroke-width="6"
+                  stroke-linecap="round"
+                /></svg
+            ></span>
+          </h1>
+          <p class="lead" style="max-width: 44rem">
+            <span>%BRAND_NAME%</span> is a browser-based activity
+            designed to help students understand how surface area and volume
+            scale. Students grab a 3D cube with a pinch, stretch the edge from 2
+            to 4, and see surface area go from 24 to 96 (×4) and volume from 8
+            to 64 (×8).
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap split">
+          <div>
+            <h2>What a session looks like</h2>
+            <ul class="check-list">
+              <li>
+                <strong>Predict.</strong> Students guess what happens to volume
+                when the edge doubles.
+              </li>
+              <li>
+                <strong>Explore.</strong> They stretch the cube with their hand
+                (or mouse) and watch the numbers.
+              </li>
+              <li>
+                <strong>Revisit.</strong> They answer the same question again
+                and compare with their first guess.
+              </li>
+              <li>
+                <strong>Discuss.</strong> A short recap links the result to
+                <em>a²</em> and <em>a³</em>.
+              </li>
+            </ul>
+            <h2 style="margin-top: 2.5rem">What you need</h2>
+            <ul class="check-list">
+              <li>A Chromebook or laptop with Chrome (recent version).</li>
+              <li>
+                A webcam is optional: mouse and touch mode give the same demo.
+              </li>
+              <li>No student accounts, no logins, no installs.</li>
+              <li>
+                Video is processed on the device only and never uploaded.
+                <a href="./privacy.html">Details</a>.
+              </li>
+            </ul>
+            <p style="margin-top: 1.5rem; color: var(--ink-soft)">
+              This is an early prototype. It covers one shape (the cube) and one
+              idea (scaling of surface area and volume).
+            </p>
+          </div>
+
+          <div class="paper" id="pilot">
+            <h2>Join the classroom pilot</h2>
+            <p>
+              Tell us a little about your class and we'll get in touch. We only
+              use these details to contact you about the pilot.
+            </p>
+            <form id="pilot-form" novalidate>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="f-name">Your name</label>
+                  <input id="f-name" name="name" autocomplete="name" required />
+                </div>
+                <div class="field">
+                  <label for="f-email">School email</label>
+                  <input
+                    id="f-email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    required
+                  />
+                </div>
+                <div class="field">
+                  <label for="f-school">School</label>
+                  <input
+                    id="f-school"
+                    name="school"
+                    autocomplete="organization"
+                  />
+                </div>
+                <div class="field">
+                  <label for="f-subject"
+                    >Subject and grade
+                    <span class="hint">(optional)</span></label
+                  >
+                  <input
+                    id="f-subject"
+                    name="subject"
+                    placeholder="e.g. Geometry, grade 9"
+                  />
+                </div>
+                <div class="field">
+                  <label for="f-devices">Devices students use</label>
+                  <select id="f-devices" name="devices">
+                    <option value="">Choose one</option>
+                    <option>Chromebooks</option>
+                    <option>Windows laptops</option>
+                    <option>Macs</option>
+                    <option>Tablets</option>
+                    <option>A mix</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="f-classes"
+                    >Number of classes
+                    <span class="hint">(optional)</span></label
+                  >
+                  <input id="f-classes" name="classes" inputmode="numeric" />
+                </div>
+                <div class="field full">
+                  <label for="f-msg"
+                    >Anything else? <span class="hint">(optional)</span></label
+                  >
+                  <textarea id="f-msg" name="message"></textarea>
+                </div>
+                <div class="full btn-row">
+                  <button class="btn" type="submit">
+                    Sign up for the pilot
+                  </button>
+                </div>
+                <div
+                  class="full"
+                  id="form-status"
+                  role="status"
+                  aria-live="polite"
+                ></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          <strong>%BRAND_NAME%</strong> · Hold concepts in your hands.
+          · Prototype, <span data-year></span>
+        </p>
+        <ul>
+          <li><a href="./lesson.html">Try the cube</a></li>
+          <li><a href="./teachers.html">For teachers</a></li>
+          <li><a href="./privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+    </footer>
+    <script type="module" src="./src/teachers.ts"></script>
+  </body>
+</html>

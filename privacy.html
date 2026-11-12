@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1B4DA6" />
+    <link rel="icon" href="%BRAND_LOGO%" />
+  <link rel="stylesheet" href="/src/styles/base.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Patrick+Hand&display=swap"
+      rel="stylesheet"
+    />
+    <title>Privacy · %BRAND_NAME%</title>
+    <meta
+      name="description"
+      content="Plain-language privacy: hand tracking runs on your device, and video is never recorded, stored or uploaded."
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="./index.html">
+          <img src="%BRAND_LOGO%" width="36" height="36" alt="" />
+          <span>%BRAND_NAME%</span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./lesson.html">Try the cube</a></li>
+            <li><a href="./teachers.html">For teachers</a></li>
+            <li><a href="./privacy.html">Privacy</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <section class="hero">
+        <div class="wrap">
+          <p class="eyebrow">Privacy</p>
+          <h1>Your camera, your device.</h1>
+          <p class="lead" style="max-width: 44rem">
+            Here is exactly what happens when you use
+            <span>%BRAND_NAME%</span>, in plain language.
+          </p>
+        </div>
+      </section>
+      <section class="section" style="padding-top: 2rem">
+        <div class="wrap">
+          <div class="paper prose">
+            <h2 style="margin-top: 0">The short version</h2>
+            <ul class="check-list">
+              <li>
+                Hand tracking runs
+                <strong>inside your browser, on your device</strong>.
+              </li>
+              <li>
+                We <strong>never record, store or upload</strong> video or
+                pictures from your camera.
+              </li>
+              <li>No accounts, no names, no logins for students.</li>
+              <li>
+                You can <strong>stop the camera at any time</strong>, or skip it
+                and use the mouse.
+              </li>
+            </ul>
+
+            <h2>What the camera is used for</h2>
+            <p>
+              When you allow the camera, your browser shows the video on your
+              screen. Our code looks at each video frame to find 21 points on
+              your hand (like your fingertips and knuckles). It keeps only those
+              points, uses them to move the cube, and then throws the frame
+              away. This all happens in the browser on your computer. No video,
+              pictures or hand points are sent over the internet.
+            </p>
+            <p>
+              We also check how bright the picture is, so we can say "try more
+              light" if it's too dark. That is a single number and it also stays
+              on your device.
+            </p>
+
+            <h2>What gets downloaded</h2>
+            <p>
+              To find your hand, the page downloads a small hand-tracking model
+              (about 8 MB) and some code from this website. Downloads only go
+              <em>to</em> your device. Nothing from your camera goes back.
+            </p>
+
+            <h2>What we count</h2>
+            <p>
+              To learn whether the tool is useful, we may count a few anonymous
+              events:
+            </p>
+            <ul>
+              <li>that a page was opened,</li>
+              <li>that the camera was allowed,</li>
+              <li>how many times the cube was grabbed,</li>
+              <li>how many seconds the page was open.</li>
+            </ul>
+            <p>
+              These counts don't include your name, an ID, cookies, or anything
+              from the camera.
+            </p>
+
+            <h2>Your answers</h2>
+            <p>
+              The lesson asks you to guess what happens to the volume. Your
+              guesses are saved only in this browser (in "local storage") so the
+              page can show your first guess next to your second. They are never
+              sent to us. Clearing your browser data removes them.
+            </p>
+
+            <h2>Teacher pilot signup</h2>
+            <p>
+              If a teacher fills in the pilot signup form, the details they type
+              (like name, school email and school) are sent through our form
+              provider, Formspree, so we can reply. We only use them to contact
+              you about the pilot. Ask us any time to delete them.
+            </p>
+
+            <h2>Fonts</h2>
+            <p>
+              Text on this site uses Google Fonts, so your browser loads font
+              files from Google's servers. No camera data is involved.
+            </p>
+
+            <h2>For the technically curious</h2>
+            <p>
+              Hand tracking uses Google's open-source MediaPipe Hand Landmarker,
+              running in a Web Worker in your browser. The code that handles the
+              camera is marked with a privacy note, and the site is set up to
+              block uploads to any server other than the form and counting
+              services listed above.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          <strong>%BRAND_NAME%</strong> · Hold concepts in your hands.
+          · Prototype, <span data-year></span>
+        </p>
+        <ul>
+          <li><a href="./lesson.html">Try the cube</a></li>
+          <li><a href="./teachers.html">For teachers</a></li>
+          <li><a href="./privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+    </footer>
+    <script type="module">
+      import { initSite } from "./src/site.ts";
+      initSite();
+    </script>
+  </body>
+</html>

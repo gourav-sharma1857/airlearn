@@ -1,0 +1,3 @@
+/* Loaded with a <link> in lesson.html so styles apply before first paint. */
+@import 'katex/dist/katex.min.css';
+@import './lesson.css';
