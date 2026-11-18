@@ -1,0 +1,687 @@
+/* Sphere Lab. Builds on lesson.css (board, readout, buttons). */
+:root {
+  --water: var(--bright);
+  --paint: var(--coral);
+  --new-surface: var(--yellow);
+}
+
+/* Sits under the three mode tabs. */
+.board-reset {
+  position: absolute;
+  left: 12px;
+  top: 196px;
+}
+@media (max-width: 600px) {
+  /* Tabs become one row at the top; keep Reset view and the camera below it. */
+  .board-reset {
+    top: 66px;
+  }
+  .board .mini-cam {
+    top: 66px;
+  }
+}
+
+.sphere-readout {
+  gap: 0.9rem;
+}
+.radius-row {
+  display: grid;
+  gap: 0.35rem;
+}
+.radius-row .small-note {
+  margin: 0;
+}
+.radius-row input[type='range'] {
+  width: 100%;
+  accent-color: var(--deep);
+  height: 2rem;
+}
+
+.stat {
+  border: 2px solid var(--navy);
+  border-left-width: 10px;
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 0.8rem 0.6rem;
+  background: var(--chalk);
+}
+.stat-water {
+  border-left-color: var(--water);
+}
+.stat-area {
+  border-left-color: var(--navy);
+}
+.stat-paint {
+  border-left-color: var(--paint);
+}
+.stat p {
+  margin: 0;
+}
+.stat-label {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+.stat-value {
+  font-family: var(--font-hand);
+  font-size: 2.4rem;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+  color: var(--navy);
+}
+.stat-value .unit {
+  font-size: 1.4rem;
+}
+.stat-sub {
+  font-size: 0.95rem;
+}
+.stat .live-formula {
+  font-size: 1.05rem;
+  min-height: 1.6em;
+  margin-top: 0.2rem;
+}
+
+/* Readable on the blue board. */
+.board-reset {
+  color: var(--chalk);
+  border-color: var(--sky);
+  background: rgba(15, 42, 85, 0.55);
+}
+.board-reset:hover {
+  background: var(--navy);
+  color: var(--chalk);
+}
+
+/* ---------- Hand mode ---------- */
+.cam-card {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(15, 42, 85, 0.55);
+  cursor: default;
+  overflow-y: auto;
+  z-index: 5;
+}
+.cam-card .paper {
+  max-width: 480px;
+  margin: 0;
+  padding: var(--space-3);
+}
+.cam-card h2 {
+  margin-top: 0;
+}
+.cam-card .error-card {
+  margin-top: var(--space-2);
+}
+.hold-hint {
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+  background: var(--yellow);
+  color: var(--navy);
+  border: 2px solid var(--navy);
+  border-radius: 999px;
+  padding: 0.2rem 1rem;
+  box-shadow: var(--sticker-shadow);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.hand-cursor.fist {
+  background: rgba(201, 226, 246, 0.35);
+  border-style: dashed;
+  width: 54px;
+  height: 54px;
+  margin: -27px 0 0 -27px;
+}
+.board .pinch-press {
+  outline: 4px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+/* ---------- Mode tabs (on the board, so a pinch can reach them) ---------- */
+.mode-tabs {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 2;
+}
+.mode-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 52px;
+  min-width: 150px;
+  padding: 0.4rem 1rem;
+  font: inherit;
+  font-family: var(--font-hand);
+  font-size: 1.45rem;
+  color: var(--chalk);
+  background: rgba(15, 42, 85, 0.6);
+  border: 2px solid var(--sky);
+  border-radius: 14px;
+  cursor: pointer;
+}
+.mode-tab small {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-left: auto;
+  opacity: 0.85;
+}
+.mode-tab:hover:not(:disabled) {
+  background: var(--navy);
+}
+.mode-tab[aria-selected='true'] {
+  background: var(--yellow);
+  color: var(--navy);
+  border-color: var(--navy);
+  box-shadow: var(--sticker-shadow);
+}
+.mode-tab:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.mode-tab:focus-visible {
+  outline: 4px solid var(--yellow);
+  outline-offset: 2px;
+}
+@media (max-width: 600px) {
+  .mode-tabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+    right: 12px;
+  }
+  .mode-tab {
+    min-width: 0;
+    font-size: 1.15rem;
+    min-height: 44px;
+    padding: 0.3rem 0.6rem;
+  }
+  .mode-tab small {
+    display: none;
+  }
+}
+
+/* ---------- Water ---------- */
+.water-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+  color: var(--chalk);
+  background: rgba(46, 159, 220, 0.9);
+  border: 2px solid var(--navy);
+  border-radius: 10px;
+  padding: 0 0.45rem;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.predict-card .paper {
+  text-align: left;
+}
+.predict-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: var(--space-2) 0 0.4rem;
+}
+.predict-choices .btn {
+  min-height: 56px;
+}
+.fill-panel {
+  border: 2px solid var(--navy);
+  border-left: 10px solid var(--water);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem 0.7rem;
+  background: var(--chalk);
+  display: grid;
+  gap: 0.35rem;
+}
+.fill-panel h2 {
+  margin: 0;
+  font-family: var(--font-body);
+}
+.fill-panel p {
+  margin: 0;
+}
+.big-pct {
+  font-size: 3rem;
+}
+.big-pct output {
+  font-variant-numeric: tabular-nums;
+}
+.water-slider-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+#water {
+  width: 100%;
+  accent-color: var(--water);
+  height: 2rem;
+}
+.fill-graph {
+  margin: 0.2rem 0 0;
+}
+.fill-graph svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid var(--sky);
+}
+.fill-graph .grid-lines line {
+  stroke: var(--sky);
+  stroke-width: 1;
+}
+.fill-graph .grid-lines text {
+  font: 700 10px var(--font-body);
+  fill: var(--ink-soft);
+}
+.fill-graph .axis {
+  stroke: var(--navy);
+  stroke-width: 1.5;
+}
+.fill-graph .curve {
+  fill: none;
+  stroke: var(--water);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.fill-graph .guide {
+  stroke: var(--navy);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.fill-graph .dot {
+  fill: var(--yellow);
+  stroke: var(--navy);
+  stroke-width: 2;
+}
+.fill-graph figcaption {
+  margin: 0.25rem 0 0;
+}
+.fill-reveal p {
+  margin: 0 0 0.5rem;
+}
+.water-word {
+  color: #1673a8;
+}
+.sphere-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.sphere-table caption {
+  text-align: left;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  padding-bottom: 0.2rem;
+}
+.sphere-table th,
+.sphere-table td {
+  padding: 0.35rem 0.3rem;
+  border-bottom: 2px dashed var(--sky);
+  text-align: left;
+}
+.sphere-table td {
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--navy);
+}
+.sphere-table td .muted {
+  font-size: 1.1rem;
+}
+.fill-reveal {
+  margin-top: 0.4rem;
+  padding: 0.8rem;
+}
+.board-hint .hl-water {
+  color: #8fd0f5;
+}
+.board.over-water {
+  cursor: ns-resize;
+}
+
+/* ---------- Paint ---------- */
+.btn-coral {
+  --bg: var(--coral);
+  --fg: var(--navy);
+}
+.btn-coral:hover {
+  background: #ff8585;
+  color: var(--navy);
+}
+.paint-label {
+  background: rgba(255, 107, 107, 0.95);
+  color: var(--navy);
+}
+.board-hint .hl-paint {
+  color: #ff9a9a;
+}
+.board.over-paint {
+  cursor: ns-resize;
+}
+.paint-panel {
+  border: 2px solid var(--navy);
+  border-left: 10px solid var(--paint);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem 0.7rem;
+  background: var(--chalk);
+  display: grid;
+  gap: 0.45rem;
+}
+.paint-panel h2 {
+  margin: 0;
+  font-family: var(--font-body);
+}
+.paint-panel p {
+  margin: 0;
+}
+.paint-top {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 0.8rem;
+  align-items: center;
+}
+.paint-can {
+  width: 84px;
+  height: auto;
+}
+.paint-can .can-body {
+  fill: none;
+  stroke: var(--navy);
+  stroke-width: 3;
+}
+.paint-can .can-rim {
+  fill: var(--sky);
+  stroke: var(--navy);
+  stroke-width: 3;
+}
+.paint-can .can-handle {
+  fill: none;
+  stroke: var(--navy);
+  stroke-width: 2.5;
+}
+.paint-can .can-paint {
+  fill: var(--paint);
+  transition: y 0.15s linear, height 0.15s linear;
+}
+.paint-can .can-text {
+  font: 800 13px var(--font-body);
+  fill: var(--navy);
+}
+#paint {
+  width: 100%;
+  accent-color: #d94848;
+  height: 2rem;
+}
+.paint-fact {
+  background: #fff3f3;
+  border-radius: 10px;
+  padding: 0.5rem 0.6rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .paint-can .can-paint {
+    transition: none;
+  }
+}
+
+/* ---------- On-board action buttons (pinchable) ---------- */
+.board-actions {
+  position: absolute;
+  right: 12px;
+  bottom: 64px;
+  z-index: 2;
+}
+.board-actions .btn-row {
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+.board-actions .btn-ghost {
+  color: var(--chalk);
+  background: rgba(15, 42, 85, 0.55);
+  border-color: var(--sky);
+}
+.board-actions .btn-small {
+  min-height: 48px;
+  font-size: 1.05rem;
+}
+
+/* ---------- Cut ---------- */
+.cut-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  color: var(--navy);
+  background: var(--yellow);
+  border: 2px solid var(--navy);
+  border-radius: 10px;
+  padding: 0 0.5rem;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: var(--sticker-shadow);
+}
+.cut-label::before {
+  content: '← ';
+}
+.cut-label.painted {
+  background: var(--coral);
+}
+.board.over-cut {
+  cursor: ns-resize;
+}
+.cut-panel {
+  border: 2px solid var(--navy);
+  border-left: 10px solid var(--new-surface);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem 0.7rem;
+  background: var(--chalk);
+}
+.cut-panel h2 {
+  margin: 0 0 0.3rem;
+  font-family: var(--font-body);
+}
+.cut-part {
+  display: grid;
+  gap: 0.4rem;
+}
+.cut-part p {
+  margin: 0;
+}
+#cut {
+  width: 100%;
+  accent-color: #b88a00;
+  height: 2rem;
+}
+.cut-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.cut-table th,
+.cut-table td {
+  padding: 0.4rem 0.25rem;
+  text-align: left;
+  border-bottom: 2px dashed var(--sky);
+}
+.cut-table thead th {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+.cut-table td {
+  font-variant-numeric: tabular-nums;
+}
+.cut-table .mult {
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+.legend .swatch {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--yellow);
+  border: 2px solid var(--navy);
+}
+.legend.painted .swatch {
+  background: var(--coral);
+}
+.board-hint .hl-chalk {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+}
+@media (max-width: 600px) {
+  /* Narrow boards: actions go top-right under the tabs, so they never cover the hint. */
+  .board-actions {
+    top: 66px;
+    bottom: auto;
+    left: auto;
+  }
+  .board .mini-cam {
+    top: 124px;
+  }
+}
+
+/* ---------- Flow ---------- */
+.next-btn {
+  justify-self: start;
+  margin-top: 0.3rem;
+}
+.challenge-panel {
+  border: 2px solid var(--navy);
+  border-left: 10px solid var(--deep);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem 0.7rem;
+  background: var(--chalk);
+  display: grid;
+  gap: 0.45rem;
+}
+.challenge-panel h2 {
+  margin: 0;
+  font-family: var(--font-body);
+}
+.challenge-panel p {
+  margin: 0;
+}
+.challenge-panel .reveal {
+  margin-top: 0.3rem;
+  padding: 0.8rem;
+}
+.challenge-panel .reveal p {
+  margin: 0 0 0.5rem;
+}
+.concept-cards {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-2) 0;
+}
+@media (min-width: 760px) {
+  .concept-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.concept {
+  border: 2px solid var(--navy);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  padding: var(--space-2);
+  box-shadow: 3px 4px 0 var(--sky);
+}
+.concept .formula {
+  font-size: 1.25rem;
+  margin: 0.6rem 0;
+}
+.concept p {
+  margin: 0;
+}
+
+/* ---------- Recording view ---------- */
+.rec-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.rec-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--sky);
+  border: 2px solid currentColor;
+}
+.rec-toggle[aria-pressed='true'] {
+  background: var(--coral);
+  color: var(--navy);
+}
+.rec-toggle[aria-pressed='true'] .rec-dot {
+  background: #c62828;
+}
+/* Hides extra interface, enlarges the board and numbers. The webcam PiP stays on the board. */
+body.recording .site-header,
+body.recording .site-footer,
+body.recording .skip-link,
+body.recording [data-step='lab'] .eyebrow,
+body.recording .small-note,
+body.recording .sphere-table,
+body.recording .fill-graph figcaption,
+body.recording .live-formula,
+body.recording .water-slider-label,
+body.recording input[type='range'],
+body.recording .radius-row .small-note,
+body.recording .paint-fact,
+body.recording .next-btn,
+body.recording .edge-buttons,
+body.recording .board-hint,
+body.recording .board-reset {
+  display: none !important;
+}
+body.recording .lesson-main {
+  padding-top: var(--space-2);
+}
+body.recording .board {
+  height: min(80vh, 760px);
+}
+body.recording .demo-title {
+  font-size: 2.2rem;
+}
+body.recording .stat-value,
+body.recording .big-pct {
+  font-size: 3.6rem;
+}
+body.recording .edge-big {
+  font-size: 2.8rem;
+}
+body.recording .cut-table,
+body.recording .stat-sub {
+  font-size: 1.15rem;
+}
+body.recording .cut-table .mult {
+  font-size: 1.5rem;
+}
+body.recording .mini-cam {
+  width: clamp(160px, 26%, 240px);
+}
+@media (min-width: 960px) {
+  body.recording .demo-grid {
+    grid-template-columns: minmax(0, 1.7fr) minmax(320px, 1fr);
+  }
+}

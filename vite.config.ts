@@ -50,6 +50,7 @@ export default defineConfig({
       input: {
         home: resolve(root, 'index.html'),
         lesson: resolve(root, 'lesson.html'),
+        sphere: resolve(root, 'sphere.html'),
         teachers: resolve(root, 'teachers.html'),
         privacy: resolve(root, 'privacy.html'),
       },

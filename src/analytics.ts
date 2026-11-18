@@ -1,14 +1,16 @@
 /**
  * Minimal, anonymous event counting.
  *
- * Only these events exist: page_open, camera_allowed, grab (a count), time_on_page (seconds).
+ * Only these events exist: page_open, camera_allowed, grab (a count), time_on_page (seconds),
+ * and on Sphere Lab mode_fill / mode_paint / mode_cut / mode_challenge (a mode was opened).
  * Each beacon carries just { event, page, value }. No IDs, no cookies, no device
  * fingerprint, no IP logging on our side, and never anything from the camera.
  * If VITE_ANALYTICS_ENDPOINT is empty, nothing is sent at all.
  */
 import { ANALYTICS_ENDPOINT } from './config';
 
-type EventName = 'page_open' | 'camera_allowed' | 'grab' | 'time_on_page';
+type EventName = 'page_open' | 'camera_allowed' | 'grab' | 'time_on_page' | ModeEvent;
+export type ModeEvent = 'mode_fill' | 'mode_paint' | 'mode_cut' | 'mode_challenge';
 
 const page = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
 let grabs = 0;
@@ -28,7 +30,7 @@ function send(event: EventName, value = 1): void {
   }
 }
 
-export function track(event: 'page_open' | 'camera_allowed'): void {
+export function track(event: 'page_open' | 'camera_allowed' | ModeEvent): void {
   send(event);
 }
 
